@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}BBC But Happy{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon/favicon.ico' %}"/>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">    
+        {% block pageCSS %} {% endblock pageCSS %}
+
+        <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/waypoints/lib/jquery.waypoints.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/waypoints/lib/shortcuts/infinite.min.js' %}"></script>
+
+    </head>
+    <body>
+        <div id="app-flex-container">
+            <div id="app-container">
+                {% block header %}
+                <div id="header">
+                    <img src="{% static 'images/BBCButHappy_Logo_Large.png' %}" alt="BBC But Happy Logo">
+                </div>
+                {% endblock header %}
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </body>
+</html>

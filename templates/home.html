@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block pageCSS %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+{% endblock pageCSS %}
+
+{% block content %}
+    <div class="infinite-container">
+    {% for article in page_obj %}
+        <div class="infinite-item">
+            <a href={{ article.guid }}>
+                <div class="article-card">
+                    <div class="card-content-container">
+                        <h4>{{ article.title }}</h4>
+                        <p>{{ article.section }} <span class="vertical-line">|</span> {{ article.pub_date|date }} </p>
+                        <p>{{ article.teaser }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <li>No articles yet.</li>
+    {% endfor %}
+    </div>
+
+    <div class="loading" style="display: none;">
+        <img src="{% static 'images/BBCButHappy_Loading.png' %}" alt="BBC But Happy Loading">
+    </div>
+
+    {% if page_obj.has_next %}
+        <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+    {% endif %}
+
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
+{% endblock content %}
